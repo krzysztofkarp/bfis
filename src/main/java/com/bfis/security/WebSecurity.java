@@ -28,6 +28,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, BackendMappings.User.SIGN_UP).permitAll()
+                .antMatchers(HttpMethod.GET, BackendMappings.User.RESET_PASSWORD).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))

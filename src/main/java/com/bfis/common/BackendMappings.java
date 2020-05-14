@@ -10,6 +10,8 @@ public class BackendMappings {
 		public class User{
 			
 			public static final String SIGN_UP = API+"/user/signup";
+			public static final String CHANGE_PASSWORD = API+"/user/changePassword";
+			public static final String RESET_PASSWORD = API+"/user/resetPassword";
 			public static final String ALL = API+"/user/getAll";
 			public static final String DELETE = API+"/user/delete";
 

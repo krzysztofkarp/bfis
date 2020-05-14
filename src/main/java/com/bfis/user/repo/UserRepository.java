@@ -24,5 +24,8 @@ public interface UserRepository extends CrudRepository<SystemUser, Long>{
 	
 	@Query("select u.moviesToWatch from SystemUser u where u.id=:id")
 	public Set<Movie> findMoviesToWatch(@Param("id") Long id);
+	
+	@Query("from SystemUser u where u.email=:email")
+	public SystemUser findByEmail(@Param("email") String email);
 
 }

@@ -32,6 +32,11 @@ public class SystemUser extends Model {
 	@NotNull
 	private String salt;
 	
+	@NotNull
+	private String email;
+	
+	private String resetHash;
+	
 	
 	
 	
@@ -97,7 +102,14 @@ public class SystemUser extends Model {
 	}
 	
 	
-	
+	public String getResetHash() {
+		return resetHash;
+	}
+
+	public void setResetHash(String resetHash) {
+		this.resetHash = resetHash;
+	}
+
 	public Set<MovieRate> getRates() {
 		return rates;
 	}
@@ -136,6 +148,15 @@ public class SystemUser extends Model {
 
 	public void setMoviesWatched(Set<Movie> moviesWatched) {
 		this.moviesWatched = moviesWatched;
+	}
+	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public void addMovieToWatch(Movie movie) {
