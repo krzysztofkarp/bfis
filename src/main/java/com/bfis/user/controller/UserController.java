@@ -33,9 +33,9 @@ public class UserController {
 	        return ResponseUtil.runInItemTemplate(() -> service.save(user));
 	 }
 	 
-	 @RequestMapping(value = BackendMappings.User.CHANGE_PASSWORD, method = RequestMethod.POST)
-	 public Response changePassword(@RequestParam String email, @RequestParam String newPassword) {
-	        return ResponseUtil.runInVoidTemplate(() -> service.updatePassword(email, newPassword));
+	 @RequestMapping(value = BackendMappings.User.CHANGE_PASSWORD, method = RequestMethod.GET)
+	 public Response changePassword(@RequestParam String email, @RequestParam String newPassword) {;
+	        return ResponseUtil.runInVoidTemplate(() -> service.updatePassword(email, crypter.encode(newPassword)));
 	 }
 	 
 	 @RequestMapping(value = BackendMappings.User.RESET_PASSWORD, method = RequestMethod.GET)
