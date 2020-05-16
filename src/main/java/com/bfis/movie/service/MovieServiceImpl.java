@@ -2,10 +2,14 @@ package com.bfis.movie.service;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bfis.apicaller.ApiCaller;
 import com.bfis.common.Utils;
+import com.bfis.model.MovieModel;
 import com.bfis.movie.model.Movie;
 import com.bfis.movie.model.MovieGenre;
 import com.bfis.movie.model.MovieType;
@@ -20,12 +24,35 @@ public class MovieServiceImpl implements MovieService {
 
 	private MovieRepository repo;
 	private MovieGenreRepository genreRepo;
+	private ApiCaller caller;
 	
 	@Autowired
-	public MovieServiceImpl(MovieRepository repo,MovieGenreRepository genreRepo) {
+	public MovieServiceImpl(MovieRepository repo,MovieGenreRepository genreRepo, ApiCaller caller) {
 		this.repo = repo;
 		this.genreRepo = genreRepo;
+		this.caller = caller;
 	}
+	
+	
+    @PostConstruct
+    public void init() {
+    	List<Movie> movies= caller.getMovies();
+    	
+    	
+    	for(Movie m : movies) {
+    		
+    		MovieGenre genre = m.getGenre();
+    		boolean exists =Utils.notNullAndNotEmpty( genreRepo.exists(genre.getName()));
+    		if(!exists) {
+    			genreRepo.save(genre);
+    		}
+    		
+    		repo.save(m);
+    		
+    	}
+
+    }
+	
 
 	@Override
 	public List<Movie> getAll() {

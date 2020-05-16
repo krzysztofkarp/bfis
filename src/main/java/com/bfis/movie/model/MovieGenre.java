@@ -30,6 +30,13 @@ public class MovieGenre extends Model{
 	
 	
 	
+	public MovieGenre() {
+		
+	}
+	
+	public MovieGenre(String name) {
+		this.name = name;
+	}
 
 	public String getName() {
 		return name;

@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -23,6 +24,8 @@ public class Movie extends Model{
 	
 	
 	private String title;
+	
+	@Column(length = 65535, columnDefinition="text")
 	private String description;
 	private String imageUrl;
 	private MovieType type;
@@ -95,6 +98,14 @@ public class Movie extends Model{
 		this.raters = raters;
 	}
 	
+	
+	
+	public MovieGenre getGenre() {
+		return genre;
+	}
+	public void setGenre(MovieGenre genre) {
+		this.genre = genre;
+	}
 	public void addViewer(SystemUser user) {
 		this.viewers.add(user);
 		user.getMoviesToWatch().add(this);
